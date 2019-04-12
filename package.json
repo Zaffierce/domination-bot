@@ -1,0 +1,15 @@
+{
+  "name": "greeter-bot",
+  "version": "1.0.0",
+  "description": "My own Discord bot",
+  "main": "bot.js",
+  "author": "Zaff",
+  "dependencies": {
+    "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
+    "discord.js": "^11.4.2",
+    "nodemon": "^1.18.3",
+    "set-default": "^0.3.0",
+    "sqlite": "^3.0.0",
+    "winston": "^2.4.3"
+  }
+}

@@ -1,0 +1,5 @@
+module.exports.run = async (bot, message, args) => {
+        
+    message.channel.send("**The following information is for the Patreon Request:**\n\n*Please note that it takes a few days for us to receive the Patreon list, so please be patient at the beginning of each month.*\n\n**How to request**: https://goo.gl/forms/ScVJJxXLA53HTCsx2\n\n**What you can request**:\n   - *Any dino that spawns **NATURALLY** within Ark, at the max level available of 225 for regular dinos and 270 for Tek.*\n\n**What you cannot request**:\n   - *A DodoRex at level 1000*\n   - *Specific stats on your dino*\n\n**Other information**:\n   - *If you are a $10 supporter, you have insurance on your spawned dino.  This means if this dino dies for some reason, we will replace it once and only once!*\n   - *You can choose to have the colors changed on the dino that we spawn, however, do note that this will cause it to be spayed/neutered*\n\n");
+
+};
