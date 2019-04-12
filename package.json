@@ -1,9 +1,9 @@
 {
   "name": "greeter-bot",
   "version": "1.0.0",
-  "description": "My own Discord bot",
+  "description": "DomiNATION Support Bot",
   "main": "bot.js",
-  "author": "Zaff",
+  "author": "Zaffierce",
   "dependencies": {
     "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
     "discord.js": "^11.4.2",
