@@ -1,0 +1,8 @@
+(Clones the current GIT to your computer in the current GIT directory)
+git clone https://github.com/Zaffierce/domination-bot.git
+
+(Shows what's different between us and GITHUB)
+git status
+
+(Adds files)
+git add FILENAME
