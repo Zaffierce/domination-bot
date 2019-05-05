@@ -6,3 +6,9 @@ git status
 
 (Adds files)
 git add FILENAME
+
+(Commit)
+git commit -m "Updated something..."
+
+(Pushing)
+git push

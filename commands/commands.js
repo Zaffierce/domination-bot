@@ -1,29 +1,25 @@
-module.exports.run = async (bot, message, args) => {
-        
-    message.channel.send({
-  "embed": {
-    "color": 3447003,
-    "author": {
-        "name": "DomiNATION help commands",
-        "icon_url": "http://i.imgur.com/UC61Xdr.png"
-    },
-    "fields": [
-              { "name": "**!commands**:", "value": "This provides the commands available for the DomiNATION bot, what you are reading currently." },
-              { "name": "**!emote**", "value": "This is a fun command to display emotes!" },
-              { "name": "**!help**:", "value": "This provides information for Support Requests." },
-              { "name": "**!patreon**:", "value": "This provides information on how to be a Patreon for us!" },
-              { "name": "**!patrequest**:", "value": "This can assist Patreon's when they submit their monthly requests." },
-              { "name": "**!request**:", "value": "This provides information for Support Requests." },
-              { "name": "**!support**:", "value": "This provides information for Support Requests." },
-              { "name": "**!ticket**:", "value": "This provides information for Support Requests." },
-              { "name": "**!website**:", "value": "This provides the link to the DomiNATION website." },
-              { "name": "**!whitelist:", "value": "This provides information for Patreon's on how to become Whitelisted."}
-    ]
-  }
-            })
+const Discord = require("discord.js");
 
+module.exports.run = async (bot, message, args) => {
+    message.delete();
+
+    const commandsEmbed = new Discord.RichEmbed()
+        .setColor('#BABABA')
+        .setAuthor('DomiNATION Bot commands list')
+        .addField(`!help`,`This provides information if you require assistance from the Admins.`)
+        .addField(`!patreon`,`This provides the Patreon information.`)
+        .addField(`!patrequest`,`This provides basic information for Ark's monthly Patreon dino claim.`)
+        .addField(`!steamfavorite`,`This provides the steps to favorite our servers using the Steam Server Browser.`)
+        .addField(`!rule [#]`,`This provides an Ark rule dependant to the number you provide: !rule 1 will display Ark Rule #1.`)
+        .addField(`!website`,`This provides the DomiNATION website link.`)
+        .addField(`!whitelist`,`This provides whitelisting steps for new Patreons.`)
+        // .addField(``,``)
+        // .addField(``,``)
+        // .addField(``,``)
+        // .addField(``,``)
+        .setTimestamp()
+        .setFooter(`Command list last updated on:`);
+
+
+    message.channel.send(commandsEmbed)
     };
-    
-    module.exports.config = {
-        command: "help"
-    }
