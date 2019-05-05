@@ -80,24 +80,26 @@ bot.on('raw', async event => {
 });
 
 bot.on("message", message => {
+  if (message.content.startsWith(config.prefix)) {
+    if (message.channel.type === "dm") return;
     var cont = message.content.toLowerCase().slice(config.prefix.length).split(" ");
     var args = cont.slice(1);
-    if (message.channel.type === "dm") return;
-
-    if (message.content.includes('discord.gg/'||'discordapp.com/invite/')) {
-      let content = message.content;
-      let checkEmbed = new Discord.RichEmbed()
-          //.setAuthor(message.author.username)
-          .setColor("#ffffff")
-          .setDescription("Someone has just posted an invite link.  This may or may not be malicious, but I am logging it for science purposes.")
-          .setTimestamp()
-          .addField("Author:", message.author.username)
-          .addField("Message content:", content);
-        bot.channels.get(update.closedTickets).send(checkEmbed);
+    var cmd = bot.commands.get(cont[0]);
+    if (cmd) cmd.run(bot, message, args); 
   }
 
-      var cmd = bot.commands.get(cont[0]);
-      if (cmd) cmd.run(bot, message, args); 
+  //   if (message.content.includes('discord.gg/'||'discordapp.com/invite/')) {
+  //     let content = message.content;
+  //     let checkEmbed = new Discord.RichEmbed()
+  //         //.setAuthor(message.author.username)
+  //         .setColor("#ffffff")
+  //         .setDescription("Someone has just posted an invite link.  This may or may not be malicious, but I am logging it for science purposes.")
+  //         .setTimestamp()
+  //         .addField("Author:", message.author.username)
+  //         .addField("Message content:", content);
+  //       bot.channels.get(update.closedTickets).send(checkEmbed);
+  // }
+
     //This captures cached data and does not conflict with the code above.
     if (message.channel.id == update.openTickets) {
       const filter = (reaction, user) => 
