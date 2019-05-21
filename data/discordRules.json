@@ -1,1 +1,7 @@
-{"1":{"ruleText":"Be respectful to each other."},"2":{"ruleText":"Don't be racist, sexist, or otherwise prejudiced."},"3":{"ruleText":"Don't use excessive profanity or caps."},"4":{"ruleText":"Don't spam."},"5":{"ruleText":"Listen to the admins."},"6":{"ruleText":"Don't advertise other servers."},"7":{"ruleText":"Don't post stuff that is NSFW."}}
+{"1":{"ruleText":"Be respectful to each other.","messageID":"573749362052694028"},
+"2":{"ruleText":"Don't be racist, sexist, or otherwise prejudiced.","messageID":"573749363772227586"},
+"3":{"ruleText":"Don't use excessive profanity or caps.","messageID":"573749365747875840"},
+"4":{"ruleText":"Don't spam.","messageID":"573749367182327828"},
+"5":{"ruleText":"Listen to the admins.","messageID":"573749387553931264"},
+"6":{"ruleText":"Don't advertise other servers.","messageID":"573749390771093504"},
+"7":{"ruleText":"Don't post stuff that is NSFW.","messageID":"573749397494562816"}}
