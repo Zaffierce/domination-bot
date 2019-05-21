@@ -19,7 +19,7 @@ const fs = require("fs");
         message.delete();
         console.log(message.author.username + " attempted to run a command that they don't have access to!");
         } else {
-            let channel = bot.channels.get('570150032238575616'); //rules channel
+            let channel = bot.channels.get('303140320600915969'); //rules channel
             //let announcements = bot.channels.get('566856352140623872'); //announcements channel
             if(!args[0] || !args[1] || !ruleText) { return message.channel.send("Please check your command and try again.\n**Example:** !beditrule ark 19 This rule applies to Ark and is Rule #19.") }
             
