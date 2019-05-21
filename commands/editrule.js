@@ -19,8 +19,8 @@ const fs = require("fs");
         message.delete();
         console.log(message.author.username + " attempted to run a command that they don't have access to!");
         } else {
-            let channel = bot.channels.get('303140320600915969'); //rules channel
-            let announcements = bot.channels.get('264122124585795584'); //announcements channel
+            let channel = bot.channels.get('570150032238575616'); //rules channel
+            //let announcements = bot.channels.get('566856352140623872'); //announcements channel
             if(!args[0] || !args[1] || !ruleText) { return message.channel.send("Please check your command and try again.\n**Example:** !beditrule ark 19 This rule applies to Ark and is Rule #19.") }
             
             if (ruleType === 'ark') {
@@ -34,8 +34,8 @@ const fs = require("fs");
                 const oldEmbed = new Discord.RichEmbed()
                     .setColor(`#76FF33`)
                     .addField(`Ark Rule ${ruleNumber}`,`${wRuleText}`);
-                announcements.send("A rule has been changed from...");
-                announcements.send(oldEmbed).then(function(oldEmbed) {
+                //announcements.send("A rule has been changed from...");
+                //announcements.send(oldEmbed).then(function(oldEmbed) {
                     var newText = arkRules[ruleNumber].ruleText = ruleText;
                     newText;   
                     const embed = new Discord.RichEmbed()
@@ -48,9 +48,9 @@ const fs = require("fs");
                         fields: [embedObjectID],
                     });
                     channel.fetchMessage(arkRulesID).then(message => message.edit(newEmbed));
-                    announcements.send("to...");
-                    announcements.send(newEmbed);
-                });
+                    //announcements.send("to...");
+                    //announcements.send(newEmbed);
+                //});
                 console.log(`${message.author.username} just edited Rule #${ruleNumber}.`);
                 fs.writeFile("data/arkRules.json", JSON.stringify(arkRules), (err) => {
                     if (err) console.log(err);
@@ -67,8 +67,8 @@ const fs = require("fs");
                 const oldEmbed = new Discord.RichEmbed()
                     .setColor(`0099ff`)
                     .addField(`Discord Rule ${ruleNumber}`,`${wRuleText}`);
-                announcements.send("A rule has been changed from...");
-                announcements.send(oldEmbed).then(function(oldEmbed) {
+                //announcements.send("A rule has been changed from...");
+                //announcements.send(oldEmbed).then(function(oldEmbed) {
                     var newText = discordRules[ruleNumber].ruleText = ruleText;
                     newText;
                     const embed = new Discord.RichEmbed()
@@ -81,9 +81,9 @@ const fs = require("fs");
                         fields: [embedObjectID],
                     });
                     channel.fetchMessage(discordRulesID).then(message => message.edit(newEmbed));
-                    announcements.send("to...");
-                    announcements.send(newEmbed);
-                });
+                    //announcements.send("to...");
+                    //announcements.send(newEmbed);
+                //});
                 console.log(`${message.author.username} just added Rule #${ruleNumber}.`);
                 fs.writeFile("data/discordRules.json", JSON.stringify(discordRules), (err) => {
                     if (err) console.log(err);
@@ -101,8 +101,8 @@ const fs = require("fs");
                 const oldEmbed = new Discord.RichEmbed()
                     .setColor(`#8500FF`)
                     .addField(`Patreon Rule ${ruleNumber}`,`${wRuleText}`);
-                announcements.send("A rule has been changed from...");
-                announcements.send(oldEmbed).then(function(oldEmbed) {
+                //announcements.send("A rule has been changed from...");
+                //announcements.send(oldEmbed).then(function(oldEmbed) {
                     var newText = patreonRules[ruleNumber].ruleText = ruleText;
                     newText;
                     const embed = new Discord.RichEmbed()
@@ -115,9 +115,9 @@ const fs = require("fs");
                         fields: [embedObjectID],
                     });
                     channel.fetchMessage(patreonRulesID).then(message => message.edit(newEmbed));
-                    announcements.send("to...");
-                    announcements.send(newEmbed);
-                });
+                    //announcements.send("to...");
+                    //announcements.send(newEmbed);
+                //});
                 console.log(`${message.author.username} just added Rule #${ruleNumber}.`);
                 fs.writeFile("data/patreonRules.json", JSON.stringify(patreonRules), (err) => {
                     if (err) console.log(err);
