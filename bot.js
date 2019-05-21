@@ -48,6 +48,7 @@ bot.on('raw', async event => {
 		reaction = new Discord.MessageReaction(message, emoji, 1, data.user_id === bot.user.id);
   }
   //This section below captures non-cached data
+  //Todo: Create string for reactions
 	if (message.channel.id === update.openTickets) {
 	    const filter = (reaction, user) => 
       reaction.emoji.id === update.kakoen || reaction.emoji.id === update.alphy || reaction.emoji.id === update.kerra || 
