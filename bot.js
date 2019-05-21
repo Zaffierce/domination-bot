@@ -50,12 +50,13 @@ bot.on('raw', async event => {
   //This section below captures non-cached data
 	if (message.channel.id === update.openTickets) {
 	    const filter = (reaction, user) => 
-      reaction.emoji.id === update.kakoen || reaction.emoji.id === update.achara || reaction.emoji.id === update.alphy || reaction.emoji.id === update.corvo ||
-      reaction.emoji.id === update.kerra || reaction.emoji.id === update.lavayla || reaction.emoji.id === update.nast || reaction.emoji.id === update.nuggy || 
-      reaction.emoji.id === update.sasha || reaction.emoji.id === update.savage || reaction.emoji.id === update.stauro || 
-      reaction.emoji.id === update.syn || reaction.emoji.id === update.pirate || reaction.emoji.id === update.tsuki || reaction.emoji.id === update.zaff || 
-      reaction.emoji.id === update.zylana || reaction.emoji.id === update.nell || reaction.emoji.id === update.jrod || reaction.emoji.id === update.rekoj || 
-      reaction.emoji.id === update.silver || reaction.emoji.id === update.crumpets || reaction.emoji.id === update.snow ||reaction.emoji.name === '❌';
+      reaction.emoji.id === update.kakoen || reaction.emoji.id === update.alphy || reaction.emoji.id === update.kerra || 
+      reaction.emoji.id === update.lavayla || reaction.emoji.id === update.nast || reaction.emoji.id === update.nell || 
+      reaction.emoji.id === update.nuggy || reaction.emoji.id === update.stauro || reaction.emoji.id === update.zaff || 
+      reaction.emoji.id === update.zylana || reaction.emoji.id === update.jrod || reaction.emoji.id === update.rekoj || 
+      reaction.emoji.id === update.silver || reaction.emoji.id === update.crumpets || reaction.emoji.id === update.snow ||
+      reaction.emoji.id === update.gronk || reaction.emoji.id === update.savage || 
+      reaction.emoji.name === '❌';
       
       const collector = message.createReactionCollector(filter, {max: 2});
       collector.on('collect', r => {
@@ -103,12 +104,13 @@ bot.on("message", message => {
     //This captures cached data and does not conflict with the code above.
     if (message.channel.id == update.openTickets) {
       const filter = (reaction, user) => 
-      reaction.emoji.id === update.kakoen || reaction.emoji.id === update.achara || reaction.emoji.id === update.alphy || reaction.emoji.id === update.corvo ||
-      reaction.emoji.id === update.kerra || reaction.emoji.id === update.lavayla || reaction.emoji.id === update.nast || reaction.emoji.id === update.nuggy || 
-      reaction.emoji.id === update.sasha || reaction.emoji.id === update.savage || reaction.emoji.id === update.stauro || 
-      reaction.emoji.id === update.syn || reaction.emoji.id === update.pirate || reaction.emoji.id === update.tsuki || reaction.emoji.id === update.zaff || 
-      reaction.emoji.id === update.zylana || reaction.emoji.id === update.nell || reaction.emoji.id === update.jrod || reaction.emoji.id === update.rekoj || 
-      reaction.emoji.id === update.silver || reaction.emoji.id === update.crumpets || reaction.emoji.id === update.snow ||reaction.emoji.name === '❌';
+      reaction.emoji.id === update.kakoen || reaction.emoji.id === update.alphy || reaction.emoji.id === update.kerra || 
+      reaction.emoji.id === update.lavayla || reaction.emoji.id === update.nast || reaction.emoji.id === update.nell || 
+      reaction.emoji.id === update.nuggy || reaction.emoji.id === update.stauro || reaction.emoji.id === update.zaff || 
+      reaction.emoji.id === update.zylana || reaction.emoji.id === update.jrod || reaction.emoji.id === update.rekoj || 
+      reaction.emoji.id === update.silver || reaction.emoji.id === update.crumpets || reaction.emoji.id === update.snow ||
+      reaction.emoji.id === update.gronk || reaction.emoji.id === update.savage || 
+      reaction.emoji.name === '❌';
       
       const collector = message.createReactionCollector(filter, {max: 2});
       collector.on('collect', r => {
