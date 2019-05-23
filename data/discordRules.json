@@ -1,7 +1,1 @@
-{"1":{"ruleText":"Be respectful to each other.","messageID":"573749362052694028"},
-"2":{"ruleText":"Don't be racist, sexist, or otherwise prejudiced.","messageID":"573749363772227586"},
-"3":{"ruleText":"Don't use excessive profanity or caps.","messageID":"573749365747875840"},
-"4":{"ruleText":"Don't spam.","messageID":"573749367182327828"},
-"5":{"ruleText":"Listen to the admins.","messageID":"573749387553931264"},
-"6":{"ruleText":"Don't advertise other servers.","messageID":"573749390771093504"},
-"7":{"ruleText":"Don't post stuff that is NSFW.","messageID":"573749397494562816"}}
+{"1":{"ruleText":"Be respectful to each other.","ruleNum":"1","messageID":"580992656507797504"},"2":{"ruleText":"Don't be racist, sexist, or otherwise prejudiced.","ruleNum":"2","messageID":"580992656772169730"},"3":{"ruleText":"Don't use excessive profanity or caps.","ruleNum":"3","messageID":"580992657636065280"},"4":{"ruleText":"Don't spam.","ruleNum":"4","messageID":"580992658290507776"},"5":{"ruleText":"Listen to the admins.","ruleNum":"5","messageID":"580992682030137350"},"6":{"ruleText":"Don't advertise other servers.","ruleNum":"6","messageID":"580992682537517066"},"7":{"ruleText":"Don't post NSFW content.","ruleNum":"7","messageID":"580992683070455845"}}
