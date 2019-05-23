@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const serverAdmins = require('../data/serverAdmins.json');
 const fs = require("fs");
-const update = require('..update.json');
+const update = require('../update.json');
 
     module.exports.run = async (bot, message, args) => {
     
