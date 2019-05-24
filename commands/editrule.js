@@ -2,7 +2,8 @@ const Discord = require("discord.js");
 const arkRules = require('../data/arkRules.json');
 const discordRules = require('../data/discordRules.json');
 const patreonRules = require('../data/patreonRules.json');
-const update = require('../update.json');
+const banRules = require('../data/banRules.json');
+const update = require("../update.json");
 const fs = require("fs");
 
     module.exports.run = async (bot, message, args) => {
@@ -136,7 +137,7 @@ const fs = require("fs");
                     ruleNum: "",
                     messageID: "none"
                 };
-                let wRuleText = arkRules[ruleNumber].ruleText;
+                let wRuleText = patreonRules[ruleNumber].ruleText;
                 var newText = patreonRules[ruleNumber].ruleText = ruleText;
                 var newNum = patreonRules[ruleNumber].ruleNum = ruleNumber;
                 newText;
@@ -160,7 +161,7 @@ const fs = require("fs");
                 announcements.send("**OLD RULE**");
                 announcements.send(oldEmbed).then(function() {
                     var newText = patreonRules[ruleNumber].ruleText = ruleText;
-                    var newNum = discordRules[ruleNumber].ruleNum = ruleNumber;
+                    var newNum = patreonRules[ruleNumber].ruleNum = ruleNumber;
                     newText;
                     newNum;
                     const embed = new Discord.RichEmbed()
@@ -179,6 +180,59 @@ const fs = require("fs");
                 });
                 console.log(`${message.author.username} just edited Patreon Rule #${ruleNumber}.`);
                 fs.writeFile("data/patreonRules.json", JSON.stringify(patreonRules), (err) => {
+                    if (err) console.log(err);
+                });
+                }
+            }
+            
+            if (ruleType === 'ban') {
+                message.delete();
+                if (!banRules[ruleNumber]) banRules[ruleNumber] = {
+                    ruleText: "",
+                    ruleNum: "",
+                    messageID: "none"
+                };
+                let wRuleText = banRules[ruleNumber].ruleText;
+                var newText = banRules[ruleNumber].ruleText = ruleText;
+                var newNum = banRules[ruleNumber].ruleNum = ruleNumber;
+                newText;
+                newNum;
+                
+                if (banRules[ruleNumber].messageID === "none") {
+                    const embed = new Discord.RichEmbed()
+                        .setColor(`#f44242`)
+                        .setDescription(`${ruleText}`);
+                    message.channel.send("Editing the Ban 2.0 Notes.  This will not appear until !postrules has been ran.");
+                    message.channel.send(embed);
+                    console.log(`${message.author.username} just edited Ban 2.0 Notes.`);
+                    fs.writeFile("data/banRules.json", JSON.stringify(banRules), (err) => {
+                    if (err) console.log(err);
+                });
+                } else {
+                const oldEmbed = new Discord.RichEmbed()
+                    .setColor(`#f44242`)
+                    .setDescription(`${wRuleText}`);                    
+                announcements.send("A change has been made to the Ban 2.0 Notes!");
+                announcements.send("**OLD NOTES**");
+                announcements.send(oldEmbed).then(function() {
+                    var newText = banRules[ruleNumber].ruleText = ruleText;
+                    var newNum = banRules[ruleNumber].ruleNum = ruleNumber;
+                    newText;
+                    newNum;
+                    const embed = new Discord.RichEmbed()
+                    .setColor(`f44242`)
+                    .setDescription(`${ruleText}`);
+                    const newEmbed = new Discord.RichEmbed({
+                        color: embed.color,
+                        description: ruleText,
+                    });
+                    let banRulesRulesID = banRules[ruleNumber].messageID;
+                    channel.fetchMessage(banRulesRulesID).then(message => message.edit(newEmbed));
+                    announcements.send("**NEW NOTE**");
+                    announcements.send(newEmbed);
+                });
+                console.log(`${message.author.username} just edited Ban 2.0 Notes.`);
+                fs.writeFile("data/banRules.json", JSON.stringify(banRules), (err) => {
                     if (err) console.log(err);
                 });
                 }

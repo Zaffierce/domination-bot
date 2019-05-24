@@ -3,6 +3,7 @@ const arkRules = require('../data/arkRules.json');
 const discordRules = require('../data/discordRules.json');
 const patreonRules = require('../data/patreonRules.json');
 const serverAdmins = require('../data/serverAdmins.json');
+const banRules = require('../data/banRules.json');
 const fs = require("fs");
 
     module.exports.run = async (bot, message, args) => {
@@ -132,31 +133,28 @@ const fs = require("fs");
                         });
                     }
                     message.channel.send(lineBreakEmbed);
+                    
                     const gamingPointSystemEmbedHeader = new Discord.RichEmbed()
                         .setColor('#f44242')
                         .setAuthor('DomiNATION Gaming Point System 2.0')
                         .setDescription(`This is the guidelines by which the Admin's follow when issuing punishments.  This is public to make it known to all, so each punishment is fair and just.  Points are accumulated by breaking the rules, each violation of a rule gains a player(s) points depending on severity and times occured.  Punishments are handed down based on how many points a player(s) has, based on the following guide:`)
                         .setThumbnail('https://cdn.discordapp.com/attachments/566853064967847946/572723585840447499/ban-hammer-ol-512.png')
-                        .addBlankField()
-                        //.addField(`0 points`, `No action taken`)
-                        .addField(`1 - 3 points`,`Warning issued`)
-                        .addField(`4 - 6 points`,`Event ban for 30 days`)
-                        .addField(`7 - 8 points`,`3 day server ban`)
-                        .addField(`9 - 12 points`,`Cluster ban, with the option to appeal in 6 months`)
-                        .addField(`12+ points`,`Permanent cluster ban with no option to appeal`);
                     message.channel.send(gamingPointSystemEmbedHeader);
-                    const gamingPointSystemEmbed1 = new Discord.RichEmbed()
-                        .setColor('#f44242')
-                        .addField(`Point System Notes:`,`● A player may submit a ban appeal 6 months after their ban by filling out the request form found by typing !help`)
-                        .addField(`\u200B`,`● Bans are all encompassing, and include any/all games the player(s) in question play, and may also include Discord. Points fall off at a rate of 3 points every 30 days.`)
-                        .addField(`\u200B`,`● First time offenders are given a warning, and 30 day probation, but no points. Any additional violations during this 30 day probation period will count as a second offense and points will be given.`)            
-                        .addField(`\u200B`,`● A publicly viewable database, showing all current players from all games/servers that have points, as well as the number of points they have and what the points were earned for, can be viewable here - https://docs.google.com/spreadsheets/d/1HtqVVlqs4WhDAe5IZ0QYaKErSXEmaxEgDbvK9qw6jX0/edit?usp=sharing. Those who break the rules will be put on display for everyone here to shame and be aware of the things they have done.`);
-                        message.channel.send(gamingPointSystemEmbed1);
-                    //const gamingPointSystemEmbed2 = new Discord.RichEmbed()
-                        //.setColor('#f44242')
-                        //.addField(`\u200B`,`● Any player(s) who collect nine (9) points or more and have received a permanent ban may file a ban appeal. However, they must wait six (6) months after their ban date before such an appeal will even be looked at. Any ban appeals made before this time are to be discarded and ignored.`)
-                        //.addField(`\u200B`,`● A publicly viewable database, showing all current players from all games/servers that have points, as well as the number of points they have and what the points were earned for, can be viewable here - https://docs.google.com/spreadsheets/d/1HtqVVlqs4WhDAe5IZ0QYaKErSXEmaxEgDbvK9qw6jX0/edit?usp=sharing. Those who break the rules will be put on display for everyone here to shame and be aware of the things they have done.`);
-                    //message.channel.send(gamingPointSystemEmbed2);
+                        for(var i in banRules) {
+                            let myArray = banRules[i];
+                            const banRulesEmbed = new Discord.RichEmbed()
+                                .setColor('#f44242')
+                                .setDescription(`${myArray.ruleText}`);
+                    message.channel.send(banRulesEmbed).then(m => {
+                        for(var j = 0; j < i.length; j++) {
+                           var ID = myArray.messageID = m.id;
+                           ID;
+                                fs.writeFile("data/banRules.json", JSON.stringify(banRules), (err) => {
+                                    if (err) console.log(err);
+                                });
+                            }
+                        });
+                    }
                     
                     const footerEmbed = new Discord.RichEmbed()
                         .setColor('#000000')
