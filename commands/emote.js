@@ -6,8 +6,10 @@
     module.exports.run = async (bot, message, args) => {
         let emoteName = args[0];
         let wemoteName = emotes[emoteName];
-        if(!wemoteName) { message.delete();
-        message.channel.send("Please provide an emote!  You can choose from the following:\n*cheer, handsup, laugh, sorry, thank, taunt, salute, wave, yes, no*").then(d_msg => { d_msg.delete(15000);})} else {
+        if(!wemoteName) { 
+        message.channel.send("Please provide an emote!  You can choose from the following:\n*cheer, handsup, laugh, sorry, thank, taunt, salute, wave, yes, no*");
+        }
+        else {
         let emoteUrl = emotes[emoteName].url;
         let checkEmbed = new Discord.RichEmbed()
             .setImage(emoteUrl)
