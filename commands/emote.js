@@ -1,5 +1,3 @@
-    //A fun command for Nast
-    
     const Discord = require("discord.js");
     const emotes = require("../data/emotes.json");
     
@@ -7,21 +5,18 @@
         let emoteName = args[0];
         let wemoteName = emotes[emoteName];
         if(!wemoteName) { 
-        message.channel.send("Please provide an emote!  You can choose from the following:\n*cheer, handsup, laugh, sorry, thank, taunt, salute, wave, yes, no*");
-        }
-        else {
+        const emoteList = Object.keys(emotes).sort(function(a,b){
+            return emotes[b]-emotes[a]
+        })
+        const mappedEmotes = emoteList.map(c => `${c}`);
+        const embedNoEmote = new Discord.RichEmbed()
+            .setDescription("Please prove an emote!  You can choose from the following:\n`"+ mappedEmotes.sort().join(", ")+"`")
+        message.channel.send(embedNoEmote);
+        } else {
         let emoteUrl = emotes[emoteName].url;
-        let checkEmbed = new Discord.RichEmbed()
+        let embedEmote = new Discord.RichEmbed()
             .setImage(emoteUrl)
-            .setFooter("This emote is the " + emoteName + " emote!");
-        let checkEmbedSecret = new Discord.RichEmbed()
-            .setImage(emoteUrl)
-            .setFooter("This emote is a secret!");
-        
-            if (emoteName === 'nast1' || emoteName === 'nast2' || emoteName === 'nast3' || emoteName === 'tsuki' ) {
-                message.delete();
-                message.channel.send(checkEmbedSecret);
-            } else {
-        message.channel.send(checkEmbed);
-        }}
+            .setFooter(`This is the ${emoteName} emote!`);
+        message.channel.send(embedEmote);
+        }
     };
