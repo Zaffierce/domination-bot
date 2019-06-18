@@ -20,7 +20,7 @@
         // })
         // })
 
-    let embedPatreon = new Discord.RichEmbed()
+    let embed = new Discord.RichEmbed()
         .setColor('#8500FF')
         .setTitle(`Kakoen87's Patreon`)
         .setURL('https://www.patreon.com/kakoen')
@@ -34,5 +34,6 @@
         .addField(`DomiNATION Supporter++ - $15 USD`,`● All of the above\n● Acknowledged with Supporter++ rank in Discord\n● Every 3 months spent as Patreon in this tier or higher, gain 7 days of "vacation."  Use these days to have admins reset timers and feed tames.  This can stack up to 4 weeks.`)
         .addBlankField()
         .addField(`DomiNATOR - $20 USD`,`● All of the above\n● Entry into the monthly raffle of a Steam game of winners choice up to $40\n● Acknowledged with a Blue name in Discord\n● **Conan: Exiles** - Instead of a tier 3 fighter ($10 reward), you can get a named (tier 4) thrall of choice`)
-    message.channel.send(embedPatreon);
+    message.reply("please check your DM's").then(d_msg => { d_msg.delete(60000);});;
+    message.author.send(embed);
     };
