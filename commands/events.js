@@ -3,6 +3,7 @@ const events = require("../data/events.json");
 
     module.exports.run = async (bot, message, args) => {
 
+        message.delete();
         let eventNumber = 0;
         let eventText = events[eventNumber].eventData;
         const embed = new Discord.RichEmbed()
