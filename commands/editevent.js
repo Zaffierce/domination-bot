@@ -25,6 +25,7 @@ if(!modRole) {
                 .setColor(`#42ebf4`)
                 .setDescription(`${eventText}`)
                 .setThumbnail('https://cdn.discordapp.com/attachments/566853064967847946/581337829628444682/download.jpg')
+                .addField(`Event Map download link: `,`https://steamcommunity.com/sharedfiles/filedetails/?id=788341599`)
                 .addField(`If you need to use a Time Zone Converter, please visit this link.  Note:  This automatically includes the EDT/EST Time Zone.`,`https://www.timeanddate.com/worldclock/converter.html?&p1=179`);
             announcements.send(embed);
         console.log(`${message.author.username} just edited the event data.`);
