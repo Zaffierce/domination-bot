@@ -22,5 +22,5 @@ module.exports.run = async (bot, message, args) => {
         .addField('!postrules','This will post the rules and admin tribe listing to #rules.  This only needs be ran if something is added to the existing data.')
         // .setTimestamp()
         // .setFooter(`Command list last updated on:`);
-    message.channel.send(commandsEmbed);
+    message.author.send(commandsEmbed);
     };
