@@ -51,13 +51,12 @@ bot.on('raw', async event => {
   //Todo: Create string for reactions
 	if (message.channel.id === update.openTickets) {
 	    const filter = (reaction, user) => 
-      reaction.emoji.id === update.kakoen || reaction.emoji.id === update.alphy || reaction.emoji.id === update.kerra || 
-      reaction.emoji.id === update.lavayla || reaction.emoji.id === update.nast || reaction.emoji.id === update.nell || 
-      reaction.emoji.id === update.nuggy || reaction.emoji.id === update.stauro || reaction.emoji.id === update.zaff || 
-      reaction.emoji.id === update.zylana || reaction.emoji.id === update.jrod || reaction.emoji.id === update.rekoj || 
-      reaction.emoji.id === update.silver || reaction.emoji.id === update.crumpets || reaction.emoji.id === update.snow ||
-      reaction.emoji.id === update.gronk || reaction.emoji.id === update.savage || 
-      reaction.emoji.name === '❌';
+      reaction.emoji.id === update.kakoen || reaction.emoji.id === update.alphy ||  reaction.emoji.id === update.nast ||
+      reaction.emoji.id === update.nell || reaction.emoji.id === update.nuggy || reaction.emoji.id === update.stauro || 
+      reaction.emoji.id === update.zaff || reaction.emoji.id === update.zylana || reaction.emoji.id === update.jrod || 
+      reaction.emoji.id === update.silver || reaction.emoji.id === update.snow || reaction.emoji.id === update.shifty || 
+      reaction.emoji.id === update.cowdog || reaction.emoji.id === update.frank || reaction.emoji.id === update.bog || 
+      reaction.emoji.id === update.ford || reaction.emoji.id === update.sleepy || reaction.emoji.name === '❌';
       
       const collector = message.createReactionCollector(filter, {max: 2});
       collector.on('collect', r => {
@@ -105,13 +104,12 @@ bot.on("message", message => {
     //This captures cached data and does not conflict with the code above.
     if (message.channel.id == update.openTickets) {
       const filter = (reaction, user) => 
-      reaction.emoji.id === update.kakoen || reaction.emoji.id === update.alphy || reaction.emoji.id === update.kerra || 
-      reaction.emoji.id === update.lavayla || reaction.emoji.id === update.nast || reaction.emoji.id === update.nell || 
-      reaction.emoji.id === update.nuggy || reaction.emoji.id === update.stauro || reaction.emoji.id === update.zaff || 
-      reaction.emoji.id === update.zylana || reaction.emoji.id === update.jrod || reaction.emoji.id === update.rekoj || 
-      reaction.emoji.id === update.silver || reaction.emoji.id === update.crumpets || reaction.emoji.id === update.snow ||
-      reaction.emoji.id === update.gronk || reaction.emoji.id === update.savage || 
-      reaction.emoji.name === '❌';
+      reaction.emoji.id === update.kakoen || reaction.emoji.id === update.alphy ||  reaction.emoji.id === update.nast ||
+      reaction.emoji.id === update.nell || reaction.emoji.id === update.nuggy || reaction.emoji.id === update.stauro || 
+      reaction.emoji.id === update.zaff || reaction.emoji.id === update.zylana || reaction.emoji.id === update.jrod || 
+      reaction.emoji.id === update.silver || reaction.emoji.id === update.snow || reaction.emoji.id === update.shifty || 
+      reaction.emoji.id === update.cowdog || reaction.emoji.id === update.frank || reaction.emoji.id === update.bog || 
+      reaction.emoji.id === update.ford || reaction.emoji.id === update.sleepy || reaction.emoji.name === '❌';
       
       const collector = message.createReactionCollector(filter, {max: 2});
       collector.on('collect', r => {
