@@ -1,15 +1,12 @@
 {
-  "name": "greeter-bot",
-  "version": "1.0.0",
+  "name": "domination-discord-bot",
+  "version": "2.0.0",
   "description": "DomiNATION Support Bot",
   "main": "bot.js",
   "author": "Zaffierce",
   "dependencies": {
-    "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
-    "discord.js": "^11.4.2",
-    "nodemon": "^1.18.3",
-    "set-default": "^0.3.0",
-    "sqlite": "^3.0.0",
-    "winston": "^2.4.3"
+    "discord.js": "^12.1.1",
+    "dotenv": "^8.2.0",
+    "ms": "^2.1.2"
   }
 }
