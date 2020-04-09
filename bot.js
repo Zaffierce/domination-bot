@@ -2,9 +2,11 @@ const Discord = require("discord.js");
 const bot = new Discord.Client()
 const config = require("./config.json");
 const fs = require("fs");
-const update = require("./update.json");
-const tickets = require("./data/tickets.json")
+const mutedUsers = require('./data/muted.json');
 
+require('dotenv').config();
+const TOKEN = process.env.TOKEN;
+const GUILD_ID = process.env.GUILD_ID;
 bot.commands = new Discord.Collection();
 
 fs.readdir("./commands/", (err, files) => {
@@ -18,66 +20,30 @@ fs.readdir("./commands/", (err, files) => {
   });
 });
 
-
 bot.on("ready", () => {
-    console.log("I am ready!");
-    bot.user.setActivity("Type !help");
-  });
+  console.log("I am ready!");
+  bot.user.setActivity("Type !help");
 
+  setInterval(function () {
+    //This checks our muted members file every 5 minutes to ensure that nobody stayed muted
+    //if the bot were to restart, or for some other reason why the role may not have been removed
 
-const events = {
-	MESSAGE_REACTION_ADD: 'messageReactionAdd',
-	MESSAGE_REACTION_REMOVE: 'messageReactionRemove',
-};
+    let currTime = Date.now();
+    const guild = bot.guilds.cache.get(GUILD_ID);
+    let mutedRole = guild.roles.cache.find(r => r.name === "Muted");
 
-bot.on('raw', async event => {
-	if (!events.hasOwnProperty(event.t)) return;
-
-	const { d: data } = event;
-	const user = bot.users.get(data.user_id);
-	const channel = bot.channels.get(data.channel_id) || await user.createDM();
-
-	if (channel.messages.has(data.message_id)) return;
-
-	const message = await channel.fetchMessage(data.message_id);
-	const emojiKey = (data.emoji.id) ? `${data.emoji.name}:${data.emoji.id}` : data.emoji.name;
-	let reaction = message.reactions.get(emojiKey);
-
-	if (!reaction) {
-		const emoji = new Discord.Emoji(bot.guilds.get(data.guild_id), data.emoji);
-		reaction = new Discord.MessageReaction(message, emoji, 1, data.user_id === bot.user.id);
-  }
-  //This section below captures non-cached data
-  //Todo: Create string for reactions
-	if (message.channel.id === update.openTickets) {
-	    const filter = (reaction, user) => 
-      reaction.emoji.id === update.kakoen || reaction.emoji.id === update.alphy ||  reaction.emoji.id === update.nast ||
-      reaction.emoji.id === update.nell || reaction.emoji.id === update.nuggy || reaction.emoji.id === update.stauro || 
-      reaction.emoji.id === update.zaff || reaction.emoji.id === update.zylana || reaction.emoji.id === update.jrod || 
-      reaction.emoji.id === update.silver || reaction.emoji.id === update.snow || reaction.emoji.id === update.shifty || 
-      reaction.emoji.id === update.cowdog || reaction.emoji.id === update.frank || reaction.emoji.id === update.bog || 
-      reaction.emoji.id === update.ford || reaction.emoji.id === update.sleepy || reaction.emoji.name === '❌';
-      
-      const collector = message.createReactionCollector(filter, {max: 2});
-      collector.on('collect', r => {
-      const closed_tickets = bot.channels.get(update.closedTickets);
-      
-        if (r.emoji.name === '❌') {
-          closed_tickets.send(message.content).then(function (message) { message.react(r.emoji.name)});
-        } else { closed_tickets.send(message.content).then(function (message) { message.react(r.emoji.id)}); }
-        message.delete();
-        let reactedUser = r.emoji.name;
-        if(!tickets[reactedUser]) tickets[reactedUser] = {
-          amount: 0,
-        };
-    var newReactions = tickets[reactedUser].amount++;
-    newReactions;
-    fs.writeFile("data/tickets.json", JSON.stringify(tickets), (err) => {
-    if (err) console.log(err);
-});
-    })}
-   //end of section 
-	bot.emit(events[event.t], reaction, user);
+    for (const user in mutedUsers) {
+      if (mutedUsers[user].time < currTime) {
+        let userID = user.replace(/[<@>]/g, "");
+        let test = guild.members.cache.get(userID);
+        test.roles.remove(mutedRole.id);
+        delete mutedUsers[user];
+        fs.writeFile("data/muted.json", JSON.stringify(mutedUsers), (err) => {
+          if (err) console.log(err);
+        });
+      }
+    }
+ }, 60 * 1000 * 5);
 });
 
 bot.on("message", message => {
@@ -88,49 +54,8 @@ bot.on("message", message => {
     var cmd = bot.commands.get(cont[0]);
     if (cmd) cmd.run(bot, message, args); 
   }
-
-  //   if (message.content.includes('discord.gg/'||'discordapp.com/invite/')) {
-  //     let content = message.content;
-  //     let checkEmbed = new Discord.RichEmbed()
-  //         //.setAuthor(message.author.username)
-  //         .setColor("#ffffff")
-  //         .setDescription("Someone has just posted an invite link.  This may or may not be malicious, but I am logging it for science purposes.")
-  //         .setTimestamp()
-  //         .addField("Author:", message.author.username)
-  //         .addField("Message content:", content);
-  //       bot.channels.get(update.closedTickets).send(checkEmbed);
-  // }
-
-    //This captures cached data and does not conflict with the code above.
-    if (message.channel.id == update.openTickets) {
-      const filter = (reaction, user) => 
-      reaction.emoji.id === update.kakoen || reaction.emoji.id === update.alphy ||  reaction.emoji.id === update.nast ||
-      reaction.emoji.id === update.nell || reaction.emoji.id === update.nuggy || reaction.emoji.id === update.stauro || 
-      reaction.emoji.id === update.zaff || reaction.emoji.id === update.zylana || reaction.emoji.id === update.jrod || 
-      reaction.emoji.id === update.silver || reaction.emoji.id === update.snow || reaction.emoji.id === update.shifty || 
-      reaction.emoji.id === update.cowdog || reaction.emoji.id === update.frank || reaction.emoji.id === update.bog || 
-      reaction.emoji.id === update.ford || reaction.emoji.id === update.sleepy || reaction.emoji.name === '❌';
-      
-      const collector = message.createReactionCollector(filter, {max: 2});
-      collector.on('collect', r => {
-      const closed_tickets = bot.channels.get(update.closedTickets);
-      
-        if (r.emoji.name === '❌') {
-          closed_tickets.send(message.content).then(function (message) { message.react(r.emoji.name)});
-        } else { closed_tickets.send(message.content).then(function (message) { message.react(r.emoji.id)}); }
-        message.delete();
-        let reactedUser = r.emoji.name;
-        if(!tickets[reactedUser]) tickets[reactedUser] = {
-          amount: 0,
-        };
-    var newReactions = tickets[reactedUser].amount++;
-    newReactions;
-    fs.writeFile("data/tickets.json", JSON.stringify(tickets), (err) => {
-    if (err) console.log(err);
-});
-    })}
 });
 
 bot.on('error', console.error);
 
-bot.login(config.token);
+bot.login(TOKEN);
