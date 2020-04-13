@@ -1,37 +1,42 @@
 const Discord = require("discord.js");
-const update = require("../update.json");
-
-//Create embed help command?  
-//Create universal help command based on where the command is ran?  Talk to Alphy.
+require('dotenv').config();
+const ark_support = process.env.ARK_SUPPORT_ID;
+const atlas_support = process.env.ATLAS_SUPPORT_ID;
 
 module.exports.run = async (bot, message, args) => {
+  const embed = new Discord.MessageEmbed()
+    .setColor('RED')
+    .setDescription('Hello, your request is important to us.  Please follow the steps below to fill out a support ticket and somebody will assist you when available.')
 
-    if (message.channel.id === update.arkSupport || message.channel.id === update.atlasSupport) {
-        if (message.channel.id === update.arkSupport) {
-            const embed = new Discord.RichEmbed()
-                .setAuthor(`DomiNATION Ark Support Form`)
-                .setThumbnail('http://orig14.deviantart.net/2c5f/f/2015/311/3/5/ark_survival_evolved_icon_by_troublem4ker-d9fw57a.png')
-                .setDescription(`Hello, your request is important to us.  Please fill out the form below and an Admin will contact you when available.  Please be aware that this is a new system that is still in development, so please be patient.\n\nhttps://support.domination-gaming.com/`)
-            message.channel.send(embed);
-        }
-        if (message.channel.id === update.atlasSupport) {
-            const embed = new Discord.RichEmbed()
-                .setAuthor(`DomiNATION Atlas Support Form`)
-                .setThumbnail('https://cdn.discordapp.com/attachments/594779842453569546/594816009144369153/atlas.png')
-                .setDescription(`Hello, your request is important to us.  Please fill out the form below and an Admin will contact you when available.  Please be aware that tickets take upwards of 5 minutes to appear in our queue, so please be patient.\n\nhttps://forms.gle/J1s66sNXU8U3z9D38`)
-            message.channel.send(embed);
-            }    
-        // if (message.channel.id === update.conanSupport) {
-        //   const embed = new Discord.RichEmbed()
-        //     .setAuthor(`DomiNATION Conan Support Form`)
-        //     .setDescription(``)
-        //   message.channel.send(embed);
-        // }
-    } else {
-        message.reply("please use the appropriate support channel for this command.").then(d_msg => { d_msg.delete(60000);});;
-    }
-}
+  switch(message.channel.id) {
+    case ark_support:
+      embed
+        .setTitle('DomiNATION Ark Support')
+        .setURL('https://support.domination-gaming.com/')
+        .setThumbnail('http://orig14.deviantart.net/2c5f/f/2015/311/3/5/ark_survival_evolved_icon_by_troublem4ker-d9fw57a.png')
+        .addFields(
+          {name: 'Step 1', value: 'Click this link! https://support.domination-gaming.com/', inline: false},
+          {name: 'Step 2', value: "At the top of the window that opens, please click '**Open a Ticket**'", inline: false},
+          {name: 'Step 3', value: 'Follow the steps in the form and fill out all blanks or drop downs.', inline: false},
+          {name: 'Step 4', value: "Click the '**Submit Ticket**' button and wait patiently!", inline: false}
+        );
+        message.channel.send(embed);
+      break;
+
+    case atlas_support:
+      embed
+        .setTitle('The PACK Gaming Support Form')
+        .setURL('https://docs.google.com/forms/d/e/1FAIpQLSd-shYR0dArSHFGgE2m_APROh9gthUDopQyu7VZ2Q9AEPM7EQ/viewform')
+        .setThumbnail('https://cdn.discordapp.com/attachments/594779842453569546/594816009144369153/atlas.png')
+        .addFields(
+          {name: 'Step 1', value: 'Click this link! https://docs.google.com/forms/d/e/1FAIpQLSd-shYR0dArSHFGgE2m_APROh9gthUDopQyu7VZ2Q9AEPM7EQ/viewform', inline: false},
+          {name: 'Step 2', value: 'Fill out the form with the appropriate information.', inline: false},
+          {name: 'Step 3', value: 'Submit the ticket and wait patiently!', inline: false},
+        );
+        message.channel.send(embed);
+      break;
     
-    module.exports.config = {
-        command: "help"
-    }
+    default:
+      message.reply("please use the appropriate support channel for this command.").then(d_msg => d_msg.delete({timeout: 60000}));
+  }  
+}
