@@ -3,7 +3,6 @@ const arkRules = require('../data/arkRules.json');
 const discordRules = require('../data/discordRules.json');
 const patreonRules = require('../data/patreonRules.json');
 const banRules = require('../data/banRules.json');
-const update = require("../update.json");
 const fs = require("fs");
 require('dotenv').config();
 
@@ -14,7 +13,7 @@ module.exports.run = async (bot, message, args) => {
   let ruleNumber = args[1];
   let ruleText = message.content.split(' ').splice(3).join(' ');
   let modRole = message.member.hasPermission('KICK_MEMBERS');
-  let rules = bot.channels.cache.get(update.rules);
+  let rules = bot.channels.cache.get(process.env.RULES_ID);
   let announcements = bot.channels.cache.get(process.env.ANNOUNCEMENTS_ID);
 
   if(!modRole) {     
