@@ -15,10 +15,10 @@ module.exports.run = async (bot, message, args) => {
         .setURL('https://support.domination-gaming.com/')
         .setThumbnail('http://orig14.deviantart.net/2c5f/f/2015/311/3/5/ark_survival_evolved_icon_by_troublem4ker-d9fw57a.png')
         .addFields(
-          {name: 'Step 1', value: 'Click this link! https://support.domination-gaming.com/', inline: false},
-          {name: 'Step 2', value: "At the top of the window that opens, please click '**Open a Ticket**'", inline: false},
-          {name: 'Step 3', value: 'Follow the steps in the form and fill out all blanks or drop downs.', inline: false},
-          {name: 'Step 4', value: "Click the '**Submit Ticket**' button and wait patiently!", inline: false}
+          {name: '**Step 1**', value: "Click [this link!](https://support.domination-gaming.com/ 'DomiNATION Support Website')", inline: false},
+          {name: '**Step 2**', value: "At the top of the window that opens, please click '**Open a Ticket**'", inline: false},
+          {name: '**Step 3**', value: 'Follow the steps in the form and fill out all blanks or drop downs.', inline: false},
+          {name: '**Step 4**', value: "Click the '**Submit Ticket**' button and wait patiently!", inline: false}
         );
         message.channel.send(embed);
       break;

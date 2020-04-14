@@ -6,8 +6,6 @@ module.exports.run = async (bot, message, args) => {
 
     if (userID === "143840467312836609") {
         message.channel.send(args.join(' '));
-    } else {
-        console.log(message.author.username + " attempted to run the secretme command.")
     }
 
 };
