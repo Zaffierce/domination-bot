@@ -24,26 +24,26 @@ bot.on("ready", () => {
   console.log("I am ready!");
   bot.user.setActivity("Type !help");
 
-  setInterval(function () {
-    //This checks our muted members file every 5 minutes to ensure that nobody stayed muted
-    //if the bot were to restart, or for some other reason why the role may not have been removed
+//   setInterval(function () {
+//     //This checks our muted members file every 5 minutes to ensure that nobody stayed muted
+//     //if the bot were to restart, or for some other reason why the role may not have been removed
 
-    let currTime = Date.now();
-    const guild = bot.guilds.cache.get(GUILD_ID);
-    let mutedRole = guild.roles.cache.find(r => r.name === "Muted");
+//     let currTime = Date.now();
+//     const guild = bot.guilds.cache.get(GUILD_ID);
+//     let mutedRole = guild.roles.cache.find(r => r.name === "Muted");
 
-    for (const user in mutedUsers) {
-      if (mutedUsers[user].time < currTime) {
-        let userID = user.replace(/[<@>]/g, "");
-        let test = guild.members.cache.get(userID);
-        test.roles.remove(mutedRole.id);
-        delete mutedUsers[user];
-        fs.writeFile("data/muted.json", JSON.stringify(mutedUsers), (err) => {
-          if (err) console.log(err);
-        });
-      }
-    }
- }, 60 * 1000 * 5);
+//     for (const user in mutedUsers) {
+//       if (mutedUsers[user].time < currTime) {
+//         let userID = user.replace(/[<@>]/g, "");
+//         let test = guild.members.cache.get(userID);
+//         test.roles.remove(mutedRole.id);
+//         delete mutedUsers[user];
+//         fs.writeFile("data/muted.json", JSON.stringify(mutedUsers), (err) => {
+//           if (err) console.log(err);
+//         });
+//       }
+//     }
+//  }, 60 * 1000 * 5);
 });
 
 bot.on("message", message => {
