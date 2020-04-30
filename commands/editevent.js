@@ -10,7 +10,7 @@ module.exports.run = async (bot, message, args) => {
   let announcements = bot.channels.cache.get(process.env.ANNOUNCEMENTS_ID);
   
   if(!modRole) {     
-      message.delete();
+    message.delete();
   } else {
 
     let eventData = eventText;
@@ -20,6 +20,8 @@ module.exports.run = async (bot, message, args) => {
     if (!events[eventNumber]) events[eventNumber] = {
       eventData: eventData,
     };
+    let newEventData = events[eventNumber].eventData = eventData;
+    newEventData;
     const embed = new Discord.MessageEmbed()
       .setAuthor('Upcoming DomiNATION Ark Events!')
       .setColor(`#42ebf4`)
