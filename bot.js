@@ -7,6 +7,7 @@ const mutedUsers = require('./data/muted.json');
 require('dotenv').config();
 const TOKEN = process.env.TOKEN;
 const GUILD_ID = process.env.GUILD_ID;
+const NOTES_CHANNEL = process.env.NOTES_ID;
 bot.commands = new Discord.Collection();
 
 fs.readdir("./commands/", (err, files) => {
@@ -53,6 +54,13 @@ bot.on("message", message => {
     var args = cont.slice(1);
     var cmd = bot.commands.get(cont[0]);
     if (cmd) cmd.run(bot, message, args); 
+  }
+
+  if (message.channel.id == NOTES_CHANNEL) {
+    const userID = message.content.split(',')[0].replace(/\D/g,'');
+    const ticketLink = message.content.split(',')[1];
+    const fetchUser = message.guild.members.cache.get(userID);
+    fetchUser.send(`There is a new note on your support ticket.  View it here:${ticketLink}`);
   }
 });
 
