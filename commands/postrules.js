@@ -100,7 +100,7 @@ module.exports.run = async (bot, message, args) => {
       const serverAdminsEmbedHeader = new Discord.MessageEmbed()
         .setColor('#F6DD0F')
         .setAuthor('Ark Admin Tribe Names')
-        .setDescription(`The following is a full list of the current ARK admins and their tribes on eachserver.  This is a point of reference for Ark Rule #6.`)
+        .setDescription(`The following is a full list of the current ARK admins and their tribes on each server.`)
         .setThumbnail('https://cdn.discordapp.com/attachments/566853064967847946/570453800129658892/e4d52f4d69d7bba67e5fd70ffe26b70d.png');
       message.channel.send(serverAdminsEmbedHeader);
       for(var i in serverAdmins) {
