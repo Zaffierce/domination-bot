@@ -47,7 +47,9 @@ bot.on("ready", () => {
 //  }, 60 * 1000 * 5);
 });
 
-bot.on("message", message => {
+
+bot.on("message", async message => {
+
   if (message.content.startsWith(config.prefix)) {
     if (message.channel.type === "dm") return;
     var cont = message.content.toLowerCase().slice(config.prefix.length).split(" ");
@@ -55,14 +57,21 @@ bot.on("message", message => {
     var cmd = bot.commands.get(cont[0]);
     if (cmd) cmd.run(bot, message, args); 
   }
-
+  
   if (message.channel.id == NOTES_CHANNEL) {
     const userID = message.content.split(',')[0].replace(/\D/g,'');
     const ticketLink = message.content.split(',')[1];
-    const fetchUser = message.guild.members.cache.get(userID);
-    fetchUser.send(`There is a new note on your support ticket.  View it here:${ticketLink}`);
+    try {
+      const fetchedUser = await message.guild.members.fetch(userID);
+      fetchedUser.send(`There is a new note on your support ticket.  View it here:${ticketLink}`);
+    } catch(e) {
+      bot.channels.cache.get(NOTES_CHANNEL).send('<@143840467312836609>, ```'+e+'```');
+    }
   }
+  
 });
+
+
 
 bot.on('error', console.error);
 
