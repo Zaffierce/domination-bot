@@ -23,7 +23,7 @@ fs.readdir("./commands/", (err, files) => {
 
 bot.on("ready", () => {
   console.log("I am ready!");
-  bot.user.setActivity("Type !help");
+  bot.user.setActivity("We're online, Survivor!");
 
 //   setInterval(function () {
 //     //This checks our muted members file every 5 minutes to ensure that nobody stayed muted
@@ -62,8 +62,11 @@ bot.on("message", async message => {
     const userID = message.content.split(',')[0].replace(/\D/g,'');
     const ticketLink = message.content.split(',')[1];
     try {
+      const hlnaQuotesArr = ["Hello Survivor!  There is a new note on your support ticket.  Check it out here", "G'day Survivor.  Message for ya", "My sensors are picking up something.  Hang on, what's this?  Survivor, I think there's a new note on your support ticket, you should check this out", "I know you're busy scratching in the dirt or lying among the beasts, or whatever you Survivors do.  I just want to tell you that you have a new note on your ticket", "You feeling all right mate?  Maybe take a read at this"]
+      const num = Math.floor(Math.random() * (hlnaQuotesArr.length - 0) + 0);
+      const hlnaQuote = hlnaQuotesArr[num];
       const fetchedUser = await message.guild.members.fetch(userID);
-      fetchedUser.send(`There is a new note on your support ticket.  View it here:${ticketLink}`);
+      fetchedUser.send(`${hlnaQuote} - ${ticketLink}`);
     } catch(e) {
       bot.channels.cache.get(NOTES_CHANNEL).send('<@143840467312836609>, ```'+e+'```');
     }
