@@ -6,7 +6,6 @@ const atlas_support = process.env.ATLAS_SUPPORT_ID;
 module.exports.run = async (bot, message, args) => {
   const embed = new Discord.MessageEmbed()
     .setColor('RED')
-    // .setDescription('Hello, your request is important to us.  Please follow the steps below to fill out a support ticket and somebody will assist you when available.')
     .setDescription("Hello Survivor!  Lookin for a bit of help, are ya?  Well, don't you worry, good thing you've got ol' HLN-A following you around, right?")
 
   switch(message.channel.id) {
@@ -15,7 +14,6 @@ module.exports.run = async (bot, message, args) => {
         .setTitle('DomiNATION Ark Support')
         .setURL('https://support.domination-gaming.com/')
         .setThumbnail('https://cdn.discordapp.com/attachments/483968919804313600/778014605410697246/20201116164643_1.png')
-        // .setImage('https://media.giphy.com/media/PpRL1KdglZP5fujnUb/giphy.mp4')
         .addFields(
           {name: '**Step 1**', value: "Click this link right [here!](https://support.domination-gaming.com/ 'DomiNATION Support Website')", inline: false},
           {name: '**Step 2**', value: "Once that opens up, click on '**Open a Ticket**'", inline: false},
@@ -39,6 +37,6 @@ module.exports.run = async (bot, message, args) => {
       break;
     
     default:
-      message.reply("Hi there, Survivor!  My creator doesn't you to run this command here.  I reckon if you try this again in the support channel, it'll work just fine.").then(d_msg => d_msg.delete({timeout: 60000}));
+      message.reply("Hi there, Survivor!  My creator doesn't want you to run this command here.  I reckon if you try this again in the support channel, it'll work just fine.").then(d_msg => d_msg.delete({timeout: 60000}));
   }  
 }
