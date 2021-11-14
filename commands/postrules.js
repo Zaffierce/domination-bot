@@ -97,14 +97,14 @@ module.exports.run = async (bot, message, args) => {
 
       for (let i in patreonRules) {
         let arr = patreonRules[i];
-        const patronRulesEmbed = new MessageEmbed()
+        const patreonRulesEmbed = new MessageEmbed()
           .setColor('#8500FF')
           .addField(`Patreon Rule #${i}`, `${arr.ruleText}`);
-        RULES.send(patronRulesEmbed).then(m => {
+        RULES.send(patreonRulesEmbed).then(m => {
           for (let j = 0; j < i.length; j++) {
             let ID = arr.messageID = m.id;
             ID;
-            fs.writeFile("data/patronRules.json", JSON.stringify(patreonRules), (err) => {
+            fs.writeFile("data/patreonRules.json", JSON.stringify(patreonRules), (err) => {
               if (err) console.log(err);
             });
           };
