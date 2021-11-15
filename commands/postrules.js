@@ -16,7 +16,6 @@ module.exports.run = async (bot, message, args) => {
       RULES.messages.fetch().then(m => {
         let messageArr = m.array();
         let i = 0;
-        console.log(messageArr.length);
         while (i < messageArr.length) {
           messageArr[i].delete();
           i++;
