@@ -60,13 +60,36 @@ bot.on("message", async message => {
   
   if (message.channel.id == NOTES_CHANNEL) {
     const userID = message.content.split(',')[0].replace(/\D/g,'');
-    const ticketLink = message.content.split(',')[1];
+    const ticketType = message.content.split(',')[1];
+    const ticketLink = message.content.split(',')[2];
+    let hlnaQuote;
     try {
-      const hlnaQuotesArr = ["Hello Survivor!  There is a new note on your support ticket.  Check it out here", "G'day Survivor.  Message for ya", "My sensors are picking up something.  Hang on, what's this?  Survivor, I think there's a new note on your support ticket, you should check this out", "I know you're busy scratching in the dirt or lying among the beasts, or whatever you Survivors do.  I just want to tell you that you have a new note on your ticket", "You feeling all right mate?  Maybe take a read at this"]
-      const num = Math.floor(Math.random() * (hlnaQuotesArr.length - 0) + 0);
-      const hlnaQuote = hlnaQuotesArr[num];
+      switch (ticketType) {
+        case ' UPDATE':
+          hlnaQuote = "Hello Survivor!  An Admin has left a note on your ticket!  Go check it out!";
+          break;
+
+        case ' COMPLETED':
+          hlnaQuote = "G'day Survivor!  Just wanted to let you know that your ticket was completed!";
+          break;
+        
+        case ' CANCELLED':
+          hlnaQuote = 'Aw sorry Survivor, it seems your ticket was cancelled out!';
+          break;
+      }
       const fetchedUser = await message.guild.members.fetch(userID);
-      fetchedUser.send(`${hlnaQuote} - ${ticketLink}`);
+      const embed = new Discord.MessageEmbed()
+      .setColor('RED')
+      .setDescription(hlnaQuote)
+      .setTitle('DomiNATION Support Ticket Notifier')
+      .setURL(ticketLink)
+      .setThumbnail('https://cdn.discordapp.com/attachments/483968919804313600/778014605410697246/20201116164643_1.png')
+      .addFields(
+        {name: '**Ticket Link**', value: ticketLink, inline: false},
+      )
+      .setTimestamp()
+      .setFooter('Message sent on')
+      fetchedUser.send(embed);
     } catch(e) {
       bot.channels.cache.get(NOTES_CHANNEL).send('<@143840467312836609>, ```'+e+'```');
     }
@@ -74,7 +97,17 @@ bot.on("message", async message => {
   
 });
 
-
+bot.on('raw', async event => {
+  if (event.t === "GUILD_MEMBER_UPDATE") {
+    const d = event.d;
+    const fetchedUser = await bot.users.cache.get(d.user.id);
+    for (role in d.roles) {
+      if (d.roles[role] === '667221406886526988') {
+        console.log("Patron role added");
+      }
+    }
+  }
+});
 
 bot.on('error', console.error);
 
