@@ -6,7 +6,6 @@ module.exports.run = async (bot, message, args) => {
     message.delete();
   } else {
     const status = message.content.split(' ').splice(1).join(' ');
-    console.log(status);
     bot.user.setActivity(status);
   }
 };
